@@ -80,7 +80,9 @@ body {
   }
 
   .wrapper-headline{
-      width: 50%;
+      /* width: 50%; */
+      padding: 10px;
+      margin: 10px;
   }
 
   input{
@@ -198,6 +200,8 @@ body {
 .main-headline, .ul {
   background-color: gray;
   opacity: 0.9;
+  padding: 32px;
+  text-align: center;
 }
 
 ul.messages {
