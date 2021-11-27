@@ -28,6 +28,7 @@ def register_request(request):
 
 def login_request(request):
     if request.method == "POST":
+        print("login POST")
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             username = form.cleaned_data.get('username')
@@ -46,6 +47,7 @@ def login_request(request):
         else:
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
+    print("login GET")
     return render(request=request, template_name="login.html", context={"login_form": form})
 
 def logout_request(request):

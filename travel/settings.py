@@ -16,7 +16,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = BASE_DIR.joinpath('templates')
 STATIC_DIR = BASE_DIR.joinpath('static')
-
+BOOT_DIR = STATIC_DIR.joinpath('bootstrap')
 LOGIN_URL = '/login'
 # MEDIA_ROOT = BASE_DIR.joinpath('static','media')
 # MEDIA_URL = '/static/media/'
@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'crispy_forms'
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,7 +131,7 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-STATICFILES_DIRS = [STATIC_DIR,]
+STATICFILES_DIRS = [STATIC_DIR,BOOT_DIR,]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
