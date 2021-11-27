@@ -1,0 +1,210 @@
+
+html { 
+    background:  url(../media/homepage.jpg)   no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+
+body {
+    font-family:  "Poppins", "Arial", "Helvetica Neue","Open Sans", sans-serif;
+    font-size: 14px;
+    color: black;
+    font-weight: 400;
+    /* background: #f4f7fa; */
+    position: relative;
+
+  }
+  
+  *:focus {
+    outline: none;
+  }
+  
+  a:hover {
+    outline: none;
+    text-decoration: none;
+  }
+
+  a {
+    /* color: white; */
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 600;
+}
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: #111;
+    font-weight: 400;
+  }
+  
+  h1 {
+    font-size: 48px;
+  }
+  
+  h2 {
+    font-size: 44px;
+  }
+  
+  h3 {
+    font-size: 26px;
+  }
+  
+  h4 {
+    font-size: 20px;
+  }
+  
+  h5 {
+    font-size: 18px;
+  }
+  
+  h6 {
+    font-size: 14px;
+  }
+  
+  p {
+    font-size: 14px;
+  }
+  
+  strong {
+    font-weight: 400;
+  }
+  
+  .img-radius {
+    border-radius: 50%;
+  }
+
+  .wrapper-headline{
+      width: 50%;
+  }
+
+  input{
+    padding: 5px;
+    margin: 5px;
+  }
+
+  label{
+    padding: 5px;
+  }
+
+/* ######################################################### */
+
+.white {
+    color: white;
+}
+
+/* ###################Card############# */
+
+
+.card {
+  border-radius: 0;
+  -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+          box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+  border: none;
+  margin-bottom: 30px;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.card-4 {
+  background: #fff;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.card-4 .card-body {
+  padding: 57px 65px;
+  padding-bottom: 65px;
+}
+
+.card .card-header {
+  background-color: transparent;
+  border-bottom: 1px solid #f1f1f1;
+  position: relative;
+}
+
+/* ==========================================================================
+   #PAGE WRAPPER
+   ========================================================================== */
+   .page-wrapper {
+    min-height: 100vh;
+  }
+
+  .p-t-130 {
+    padding-top: 130px;
+  }
+
+  .p-b-100 {
+    padding-bottom: 100px;
+  }
+  .font-poppins {
+    font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+  }
+
+  /* ==========================================================================
+   #WRAPPER
+   ========================================================================== */
+.wrapper {
+  margin: 0 auto;
+}
+
+.wrapper--w1860 {
+  max-width: 1860px;
+}
+
+.wrapper--w960 {
+  max-width: 960px;
+}
+
+.wrapper--w780 {
+  max-width: 780px;
+}
+
+.wrapper--w680 {
+  max-width: 680px;
+}
+
+/* ############ container ################ */
+
+.pcoded-main-container {
+  position: relative;
+  margin: 0 auto;
+  display: block;
+  clear: both;
+  float: unset;
+  right: 0;
+
+  min-height: 100vh;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.pcoded-content {
+  position: relative;
+  display: block;
+  padding: 30px;
+}
+
+
+.main-headline, .ul {
+  background-color: gray;
+  opacity: 0.9;
+}
+
+ul.messages {
+  font-size: 25px;
+  font-weight: 600;
+  color: maroon;
+  background-color: honeydew;
+  font-family: monospace;
+  list-style-type: none;
+}

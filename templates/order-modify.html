@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+{% load static %}
+
+    {% block content %}
+    {% load crispy_forms_tags %}
+
+
+        <div class="card card-4">
+            <div class="card-body">
+
+            <h2 class="card-header">Update Order</h2>
+            
+                <form id = "order-form" method = "POST">
+                {% csrf_token %}
+                {{form |crispy}}
+                <input type="submit" value="Submit">
+                </form>
+            
+            </div>
+        </div>
+    {% endblock content %}

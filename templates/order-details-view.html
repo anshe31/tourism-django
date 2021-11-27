@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+    <div class="card card-4">
+            <div class="card-body">
+
+            <h2>{{operation}} Order Details</h2>
+            
+                <form id = "order-form" method = "GET">
+              
+                <div class="row row-space">
+                            <div class="col-6">
+                                <div class="input-group">
+                                    <label class="label" id="fn">Order Id</label>
+                                    <input class="input--style-4" type="text" name="order_id" required>
+                                </div>
+                            </div>
+                   
+                        </div>
+
+                <input type="submit" value="Submit">
+                </form>
+            
+            </div>
+        </div>
+{% endblock content %}

@@ -1,0 +1,68 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block content %}
+{% load crispy_forms_tags %}
+
+    <div class="card card-4">
+            <div class="card-body">
+
+            <div class="result">
+             <h3 class="label" id ="ln">Order Details</h3>
+             <table>
+             <tr>
+             <th>Field</th>
+             <th>Value</th>
+             </tr>
+            <tr>
+                <td>Order Id</td>
+                <td>{{order.id}}</td>
+            </tr>
+            <tr>
+                <td>Package Name</td>
+                <td>{{order.package.package_name}}</td>
+            </tr>
+             <tr>
+                <td>Duration</td>
+                <td>{{order.package.days}}</td>
+            </tr>
+            <tr>
+                <td>Package Base Price</td>
+                <td>{{order.package.baseprice}}</td>
+            </tr>
+            <tr>
+                <td>User</td>
+                <td>{{order.user.first_name}} {{order.user.last_name}}</td>
+            </tr>
+             <tr>
+                <td>Email</td>
+                <td>{{order.user.email}}</td>
+            </tr>
+            <tr>
+                <td>No. of People</td>
+                <td>{{order.no_of_people}}</td>
+            </tr>
+            <tr>
+                <td>Total Price</td>
+                <td>{{order.order_price}}</td>
+            </tr>
+            <tr>
+                <td>Travel Date</td>
+                <td>{{order.travel_date}}</td>
+            </tr>
+            <tr>
+                <td>Order Placed</td>
+                <td>{{order.order_create_date}}</td>
+            </tr>
+            <tr>
+                <td>Order Last Updated</td>
+                <td>{{order.order_update_date}}</td>
+            </tr>
+
+            </table>
+            </div>
+
+        </div>
+        </div>
+
+{% endblock content %}
