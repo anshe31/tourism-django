@@ -17,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 TEMPLATE_DIR = BASE_DIR.joinpath('templates')
 STATIC_DIR = BASE_DIR.joinpath('static')
 
-LOGIN_URL = '/login/'
+LOGIN_URL = '/login'
 # MEDIA_ROOT = BASE_DIR.joinpath('static','media')
 # MEDIA_URL = '/static/media/'
 

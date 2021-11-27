@@ -37,17 +37,18 @@
 {% endif %}
 
 <div class="wrapper-headline">
-<div class="main-headline">
-<h1 class="white">Welcome to Anshul's Travel and Booking Website</h1>
-<h1 class="white">Kindly check from the options below</h1>
-</div>
+    <div class="main-headline">
+        <h1 class="white">Welcome to Anshul's Travel and Booking Website</h1>
+        <h1 class="white">Kindly check from the options below</h1>
+    </div>
 </div>
 
 <ul id="nav">
-            <li><a class="white" href="{% url 'create_order' %}">Book Order</a></li>
-            <li><a class="white" href="{% url 'order_details' %}">Order Details</a></li>
-            <li><a class="white" href="{% url 'update_order' %}">Update Order</a></li>
-        </ul>
+    <li><a class="white" href="/">Home</a></li>
+    <li><a class="white" href="{% url 'create_order' %}">Book Order</a></li>
+    <li><a class="white" href="{% url 'order_details' %}">Order Details</a></li>
+    <li><a class="white" href="{% url 'update_order' %}">Update Order</a></li>
+</ul>
         
 <div class="page-wrapper p-b-100 font-poppins">
     <div class="wrapper wrapper--w960">

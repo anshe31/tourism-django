@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponseRedirect
 from booking.forms import NewUserForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -13,7 +14,12 @@ def register_request(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-            return render(request, "index.html", {})
+            redirect_url = request.GET.get('next', None)
+            if redirect_url:
+                return HttpResponseRedirect(redirect_url)
+            else:
+                return render(request, "index.html", {})
+    
         messages.error(request, "Unsuccessful registration. Invalid information.")
         
     form = NewUserForm()
@@ -30,7 +36,11 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return render(request, "index.html", {})
+                redirect_url = request.GET.get('next', None)
+                if redirect_url:
+                    return HttpResponseRedirect(redirect_url)
+                else:
+                    return render(request, "index.html", {})
             else:
                 messages.error(request, "Invalid username or password.")
         else:

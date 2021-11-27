@@ -13,7 +13,7 @@ def booking_homepage(request):
     return render(request,'index.html', context={})
     # return HttpResponse("Hello, world. You're at the index.")
 
-@login_required(login_url='/login')
+@login_required()
 def create_order(request):
     if request.method == 'POST':
         # create a form instance and populate it with data from the request:
@@ -37,8 +37,8 @@ def create_order(request):
             messages.success(request, 'Order Successfully created! Order ID = {}'.format(order_id))
             return render(request, "index.html", {})
         else:
-     
-            messages.error(request, 'Invalid data Received. Please submit the form with correct data')
+ 
+            messages.error(request, form.errors)
             return render(request, "index.html", {})
 
     else:
@@ -46,7 +46,7 @@ def create_order(request):
         return render(request,'create-order.html', {'form': form})
     
 
-@login_required(login_url='/login')
+@login_required()
 def order_details(request):
     if request.method == 'GET' and request.GET:
         order_id = request.GET.get('order_id')
@@ -72,7 +72,7 @@ def order_details(request):
     else:
         return render(request, "order-details-view.html", {"operation":"Fetch"})
 
-@login_required(login_url='/login')
+@login_required()
 def update_order(request):
     print("in update")
 
