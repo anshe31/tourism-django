@@ -1,12 +1,21 @@
+from functools import partial
+from re import T
 from django.core.exceptions import ObjectDoesNotExist
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponse
+from django.http import HttpResponse, response
+import rest_framework
 
 from booking.models import Order, Package
 from .forms import OrderForm
-from .serializers import OrderSerializer
+from .serializers import OrderSerializer,PackageSerializer
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
+from booking import serializers
+from django.contrib.auth.models import User
 # Create your views here.
 
 def booking_homepage(request):
@@ -152,3 +161,56 @@ def get_order_object(orderid):
 
 def validate_user_order(request,order_obj):
     return request.user.id == order_obj.user.id
+
+class api_order(APIView):
+    print("in API view class")
+    def get(self,request,pk=None):
+        if pk:
+            print(pk)
+            order_obj = Order.objects.filter(id=pk)
+        else:
+            order_obj = Order.objects.all()
+        serializer = OrderSerializer(order_obj,many=True)
+        return Response({"order":serializer.data})
+
+    def post(self,request):
+        order = request.data.get('order')
+        
+        # lets create new order from provided data
+        serializer = OrderSerializer(data=order)
+        print(serializer)
+        if serializer.is_valid(raise_exception=True):
+            order_saved= serializer.save()
+            print('order_saved ',order_saved.id)
+            context =  {"success": "Order '{}' created successfully.".format(order_saved.id)}
+        return Response(context)
+
+    def put(self,request,pk):
+        
+        saved_order = get_object_or_404(Order.objects.all(),pk=pk)
+        print(saved_order)
+        data = request.data.get('order')
+        print(data.get('user_email'),data.get('package'))
+        
+        user_obj = User.objects.get(email = data.get('user_email'))
+        print(user_obj)
+        
+        package_obj = Package.objects.get(package_name=data.get('package'))
+        print(package_obj.baseprice)
+        
+        saved_order.order_price = calculate_price(saved_order.no_of_people,package_obj.baseprice)
+        saved_order.no_of_people = data.get('no_of_people')
+        saved_order.travel_date = data.get('travel_date')
+        saved_order.package = package_obj
+        saved_order.user = user_obj
+        
+        saved_order.save()
+        context =  {"success": "Order '{}' updated successfully.".format(saved_order.id)}
+        return Response(context)
+        
+    def delete(self,request,pk):
+        print(pk)
+        order_obj = get_object_or_404(Order.objects.all(),pk=pk)
+        order_obj.delete()
+        context =  {"success": "Order '{}' deleted successfully.".format(pk)}
+        return Response(context)
