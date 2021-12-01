@@ -9,5 +9,10 @@ urlpatterns=[
     # Adding for REST API
     path("apiOrder/", views.api_order.as_view(), name="api_order"),
     path("apiOrder/<int:pk>", views.api_order.as_view(), name="api_order"),
+    # Adding for REST API custom/raw queries
+    path("rawApiOrder/", views.raw_api_order.as_view(), name="raw_api_order"),
+    path("rawApiOrder/<int:pk>", views.raw_api_order.as_view(), name="raw_api_order"),
+    # Adding for parallel execution
+    path("multipleOrder/", views.parallel_api_order, name="parallel_api_order"),
    
 ]

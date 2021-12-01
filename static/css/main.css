@@ -1,7 +1,7 @@
 
 html { 
     background:  url(../media/homepage-mini.jpg)   no-repeat center center fixed; 
-    -webkit-background-size: cover;
+     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
@@ -14,6 +14,7 @@ body {
     font-weight: 400;
     /* background: #f4f7fa; */
     position: relative;
+
 
   }
   
@@ -83,6 +84,7 @@ body {
       /* width: 50%; */
       padding: 10px;
       margin: 10px;
+      
   }
 
   input{
@@ -202,6 +204,7 @@ body {
   opacity: 0.9;
   padding: 32px;
   text-align: center;
+  margin-top: 10%;
 }
 
 ul.messages {
@@ -211,4 +214,29 @@ ul.messages {
   background-color: honeydew;
   font-family: monospace;
   list-style-type: none;
+}
+
+/* ------------------carousal-------------------- */
+
+img{
+  /* width: 100%; */
+  /* max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block; */
+}
+.main-cover{
+  /* width:100%; */
+  /* height: 710px; */
+  /* background:  url(../media/homepage-mini-copy.jpg)   no-repeat center center fixed; 
+  background-size: cover; */
+  /* background-repeat: no-repeat; */
+  /* background-position: center; */
+}
+
+.navbar{
+  position:fixed;
+  width:100%;
+  z-index: 1;
+  top: 0;
 }

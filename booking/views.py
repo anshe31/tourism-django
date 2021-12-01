@@ -16,6 +16,11 @@ from rest_framework.views import APIView
 
 from booking import serializers
 from django.contrib.auth.models import User
+from django.db import connection
+
+import sqlite3,json
+import concurrent.futures
+from threading import Lock
 # Create your views here.
 
 def booking_homepage(request):
@@ -214,3 +219,102 @@ class api_order(APIView):
         order_obj.delete()
         context =  {"success": "Order '{}' deleted successfully.".format(pk)}
         return Response(context)
+
+
+# API using RAW/Custom queries
+class raw_api_order(APIView):
+    print("in Raw API view class")
+    def get(self,request,pk=None):
+        if pk:
+            print(pk)
+            # order_obj = Order.objects.filter(id=pk)
+            order_obj = Order.objects.raw('SELECT * FROM booking_order where id = %s',[pk])  
+        else:
+            order_obj = Order.objects.raw('SELECT * FROM booking_order')
+    
+        serializer = OrderSerializer(order_obj,many=True)
+        return Response({"order":serializer.data})
+ 
+ 
+class Database():
+    
+    def singleQuery(self,query,params,indicator,output=False):
+        print("single query"+query,params,indicator,output)
+     
+        with connection.cursor() as cursor:
+            # print("cursor started ",query)
+            cursor.execute(query)
+            # print("executed")
+            if output:
+                row = cursor.fetchall()
+                # print(row, indicator)
+                return self.formJson(row,indicator)
+    def formJson(self,resultSet,indicator):
+
+        recData = []
+        for rec in resultSet:
+            # print(rec,indicator)
+            if indicator == "orderData":
+                recData.append({"Order_price":rec[0]})
+            if indicator == "packageData":
+                recData.append({"Package_name":rec[0]})
+            if indicator == "userData":
+                recData.append({"User_name":rec[0]})
+            
+        print("json is here\n",recData)
+        return recData
+                
+        
+        
+           
+
+# API using RAW/Custom queries in parallel
+def parallel_api_order(request):
+    if request.method == 'GET':
+        print("in get")
+
+        input = [
+                {"query": """SELECT order_price FROM booking_order""",
+                 "parameters":[],
+                 "indicator" : "orderData"
+                 }
+                ,
+                 {"query": """SELECT package_name FROM booking_package""",
+                 "parameters":[],
+                 "indicator" : "packageData"
+                 },
+                 {"query": """SELECT username FROM auth_user as USER""",
+                 "parameters":[],
+                 "indicator" : "userData"
+                 }
+                ]
+
+        db = Database()
+        
+        # We can use a with statement to ensure threads are cleaned up promptly
+        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
+            # Start the load operations and mark each future with its URL
+            futures = []
+            # for query in queries:
+            for i in input:
+                futures.append(executor.submit(db.singleQuery, i["query"],None,i["indicator"],True))
+            
+            op = []             
+            for future in concurrent.futures.as_completed(futures):
+                try:
+                    print("in future result")
+                    # print(future)
+                    data = future.result()
+                    print(data)
+                    op.append(data)
+                except Exception as exc:
+                    print('generated an exception: %s' % (exc))
+            
+            # print(op)
+            # print(json.dumps(op, indent=4))
+            jsonData = json.dumps({"ViewDetails":op} )
+            print("FINAL OP")
+            print(jsonData)
+            return HttpResponse(jsonData)
+      
+        
